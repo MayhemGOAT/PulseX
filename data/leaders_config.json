@@ -1,0 +1,13 @@
+{
+  "leaders": [
+    {"handle": "elonmusk", "name": "Elon Musk", "category": "ceo", "weight": 0.9, "tickers": ["TSLA", "SPY"]},
+    {"handle": "JeromePowell", "name": "Jerome Powell", "category": "fed", "weight": 1.0, "tickers": ["SPY", "QQQ", "TLT"]},
+    {"handle": "federalreserve", "name": "Federal Reserve", "category": "fed", "weight": 0.95, "tickers": ["SPY", "TLT"]},
+    {"handle": "POTUS", "name": "US President", "category": "politician", "weight": 0.85, "tickers": ["SPY"]},
+    {"handle": "sundarpichai", "name": "Sundar Pichai", "category": "ceo", "weight": 0.6, "tickers": ["GOOGL"]},
+    {"handle": "tim_cook", "name": "Tim Cook", "category": "ceo", "weight": 0.7, "tickers": ["AAPL"]},
+    {"handle": "jimcramer", "name": "Jim Cramer", "category": "influencer", "weight": 0.5, "tickers": ["SPY"]},
+    {"handle": "RayDalio", "name": "Ray Dalio", "category": "macro", "weight": 0.75, "tickers": ["SPY", "GLD"]},
+    {"handle": "chamath", "name": "Chamath Palihapitiya", "category": "influencer", "weight": 0.55, "tickers": ["SPY", "QQQ"]}
+  ]
+}

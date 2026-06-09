@@ -1,0 +1,47 @@
+ticker: SPY
+start_date: "2018-01-01"
+
+council:
+  member_weights:
+    Sentiment Analyst: 1.0
+    Technical Analyst: 0.9
+    Macro Strategist: 1.1
+    Risk Manager: 0.8
+    Event Detector: 1.2
+
+model:
+  max_depth: 10
+  n_estimators: 200
+  min_samples_leaf: 10
+  min_samples_split: 20
+
+leaders:
+  handles:
+    - elonmusk
+    - JeromePowell
+    - federalreserve
+    - POTUS
+    - sundarpichai
+    - tim_cook
+    - jimcramer
+    - RayDalio
+    - chamath
+
+backtest:
+  train_ratio: 0.7
+  val_ratio: 0.15
+  walk_forward_window: 252
+  walk_forward_step: 21
+  initial_capital: 100000
+  threshold: 0.0
+  commission: 0.001
+  council_threshold: 0.1
+  event_min_weight: 0.85
+
+data:
+  tweet_cache: data/tweets_cache.jsonl
+  sample_tweets: data/sample_tweets.csv
+
+output:
+  images_dir: images
+  report_dir: reports

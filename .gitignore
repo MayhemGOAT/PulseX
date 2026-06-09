@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+images/
+data/tweets_cache.jsonl
+data/alerts.jsonl
+reports/
+.DS_Store
+.pytest_cache/
