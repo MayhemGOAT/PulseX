@@ -145,6 +145,22 @@ def cmd_walkforward(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_grok(args: argparse.Namespace) -> int:
+    from grok_client import is_available
+    from llm_scorer import LLMImpactScorer
+
+    if not is_available():
+        print("XAI_API_KEY not set — using rule-based fallback.")
+    scorer = LLMImpactScorer(use_grok=True)
+    result = scorer.score(args.text, args.handle)
+    print(f"Source:    {result.get('source', 'unknown')}")
+    print(f"Impact:    {result['market_impact']:+.4f}")
+    print(f"Urgency:   {result['urgency']}")
+    print(f"Tickers:   {', '.join(result['affected_tickers'])}")
+    print(f"Reasoning: {result['reasoning']}")
+    return 0
+
+
 def cmd_batch(args: argparse.Namespace) -> int:
     _apply_config(args.config)
     if args.ticker:
@@ -226,6 +242,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Tickers to run (default: SPY QQQ TSLA)",
     )
     p_batch.set_defaults(func=cmd_batch)
+
+    p_grok = sub.add_parser("grok", help="Test Grok scoring on a tweet")
+    p_grok.add_argument("text", help="Tweet text to score")
+    p_grok.add_argument("--handle", default="JeromePowell", help="Leader handle")
+    p_grok.set_defaults(func=cmd_grok)
 
     return parser
 

@@ -14,6 +14,7 @@ def test_score_returns_expected_keys():
     assert result["urgency"] in {"low", "medium", "high"}
     assert "SPY" in result["affected_tickers"]
     assert result["reasoning"]
+    assert result.get("source") == "rules"
 
 
 def test_score_tweets_llm_adds_columns():

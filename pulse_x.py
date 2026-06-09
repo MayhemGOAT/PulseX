@@ -82,9 +82,9 @@ def prepare_dataset(ticker: str = TICKER) -> tuple[pd.DataFrame, pd.DataFrame]:
     if not tweets.empty:
         scored = score_tweets(tweets)
         tweets = score_tweets_impact(scored)
-        if os.getenv("PULSEX_LLM") == "1":
-            from llm_scorer import score_tweets_llm
-            tweets = score_tweets_llm(tweets)
+        from llm_scorer import grok_enabled, score_tweets_llm
+        if grok_enabled():
+            tweets = score_tweets_llm(tweets, ticker)
 
     prices = add_sentiment_to_prices(prices, tweets)
     prices["target_return"] = prices["Close"].pct_change().shift(-1)

@@ -33,4 +33,4 @@ def test_council_runs():
         pytest.skip("yfinance unavailable — network required for integration test")
     result = run_council(prices, tweets, TICKER)
     assert "council_direction" in result
-    assert len(result["members"]) == 5
+    assert len(result["members"]) == 6

@@ -1,0 +1,32 @@
+=== MARKET MOOD ===
+Overall: bullish (score: 0.35)
+Key themes: AI capex boom, Fed patience on rates, strong jobs data
+
+=== TICKER SCORES ===
+SPY: 0.3 — Markets pricing soft landing, breadth improving
+QQQ: 0.5 — AI stocks leading, NVDA earnings beat driving sentiment
+AAPL: 0.1 — Neutral, Vision Pro buzz but China concerns linger
+MSFT: 0.4 — Azure AI growth narrative strong on X
+NVDA: 0.7 — Dominant bullish consensus, everyone talking AI demand
+TSLA: -0.2 — Musk posting but EV competition fears on X
+AMZN: 0.2 — AWS stable, retail mixed
+META: 0.3 — Ad recovery + AI investments well received
+GOOGL: 0.2 — AI features announcement getting positive traction
+AMD: 0.4 — AI chip alternative to NVDA gaining buzz
+
+=== TOP MOVERS ON X ===
+1. $NVDA — bullish — Earnings beat, AI demand insatiable
+2. $SMCI — bullish — AI server demand surge mentioned everywhere
+3. $TSLA — bearish — Price cut concerns, competition from BYD
+4. $COIN — bullish — Bitcoin rally driving crypto stock buzz
+5. $PLTR — bullish — Government AI contracts trending
+
+=== TIER-1 VOICES ===
+JeromePowell: Patient on rate cuts — dovish tone, markets liked it
+elonmusk: Tesla robotaxi event hype — mixed, bulls vs bears debating
+POTUS: Strong jobs report — bullish macro
+
+=== RISKS ===
+Inflation reacceleration if oil keeps rising
+Geopolitical tensions in Middle East
+Commercial real estate stress in regional banks

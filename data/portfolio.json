@@ -1,0 +1,10 @@
+{
+  "holdings": [
+    {"ticker": "AAPL", "shares": 10, "avg_cost": 185.0},
+    {"ticker": "NVDA", "shares": 5, "avg_cost": 120.0},
+    {"ticker": "TSLA", "shares": 8, "avg_cost": 250.0},
+    {"ticker": "SPY", "shares": 15, "avg_cost": 520.0}
+  ],
+  "cash": 2500.0,
+  "notes": "Edit this file or use: python3 market_grok.py portfolio add TICKER SHARES AVG_COST"
+}

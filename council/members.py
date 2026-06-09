@@ -256,10 +256,77 @@ class EventDetector(CouncilMember):
         )
 
 
+class GrokAnalyst(CouncilMember):
+    """Grok (xAI) synthesis of leader tweets + price context."""
+
+    def __init__(self) -> None:
+        super().__init__(name="Grok Analyst", role="grok", weight=1.3)
+
+    def analyze(self, context: CouncilContext) -> MemberOpinion:
+        from grok_client import analyze_market, is_available
+
+        tweets = context.tweets
+        row = context.price_row
+
+        if tweets.empty or not is_available():
+            # Use pre-scored Grok/rule columns if present on tweets
+            if not tweets.empty and "llm_market_impact" in tweets.columns:
+                impacts = tweets["llm_market_impact"].astype(float)
+                direction = _clip(float(impacts.mean()) * 2, -1, 1)
+                conf = _clip(min(len(impacts) / 3, 1.0) * 0.7, 0, 1)
+                source = tweets.get("llm_source", pd.Series(["rules"])).iloc[0]
+                return MemberOpinion(
+                    direction=direction,
+                    confidence=conf,
+                    reasoning=f"Cached {source} scores on {len(impacts)} tweet(s), avg impact {direction:+.3f}.",
+                    signals={"grok_available": False, "cached": True},
+                    member_name=self.name,
+                )
+            return MemberOpinion(
+                direction=0.0,
+                confidence=0.1,
+                reasoning="Grok unavailable — set XAI_API_KEY in .env to enable.",
+                signals={"grok_available": False},
+                member_name=self.name,
+            )
+
+        price_summary = {
+            "rsi": _row_val(row, "rsi_14", 50),
+            "leader_sentiment": _row_val(row, "leader_sentiment"),
+            "return_1d": _row_val(row, "return_1d"),
+            "close": _row_val(row, "Close"),
+        }
+        tweet_dicts = tweets.to_dict("records")
+        grok = analyze_market(context.ticker, price_summary, tweet_dicts)
+
+        if grok and "direction" in grok:
+            direction = _clip(float(grok["direction"]), -1, 1)
+            confidence = _clip(float(grok.get("confidence", 0.6)), 0, 1)
+            reasoning = grok.get("reasoning", "Grok market analysis")
+            if grok.get("key_risk"):
+                reasoning += f" Risk: {grok['key_risk']}"
+            return MemberOpinion(
+                direction=direction,
+                confidence=confidence,
+                reasoning=reasoning,
+                signals={"grok_available": True, "key_risk": grok.get("key_risk")},
+                member_name=self.name,
+            )
+
+        return MemberOpinion(
+            direction=0.0,
+            confidence=0.2,
+            reasoning="Grok API call failed — using neutral stance.",
+            signals={"grok_available": True, "error": True},
+            member_name=self.name,
+        )
+
+
 DEFAULT_MEMBERS: list[CouncilMember] = [
     SentimentAnalyst(),
     TechnicalAnalyst(),
     MacroStrategist(),
     RiskManager(),
     EventDetector(),
+    GrokAnalyst(),
 ]

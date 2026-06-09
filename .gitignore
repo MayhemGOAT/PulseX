@@ -9,3 +9,4 @@ data/alerts.jsonl
 reports/
 .DS_Store
 .pytest_cache/
+grok_answer.txt

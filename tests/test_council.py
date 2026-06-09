@@ -40,7 +40,7 @@ def test_council_deliberation_returns_verdict():
     verdict = council.deliberate(_make_context())
     assert -1 <= verdict.direction <= 1
     assert 0 <= verdict.confidence <= 1
-    assert len(verdict.member_opinions) == 5
+    assert len(verdict.member_opinions) == 6
 
 
 def test_bullish_sentiment_skews_direction():
