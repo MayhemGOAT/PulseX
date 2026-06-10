@@ -1,11 +1,8 @@
-# 📈 PulseX — Your Free AI Trading Assistant
+# 📈 PulseX — AI Council Market Predictor
 
-**Ask Grok what's happening on X → paste the answer → get stock predictions + trade ideas.**
+**Predict markets from leader X sentiment — plus a free Grok copy-paste workflow for daily trade ideas.**
 
-No paid API keys. No coding experience needed. Runs 100% locally (tested on macOS and Linux).
-
-> **Two ways in:** **MarketGrok** is the beginner copy-paste workflow — start here.
-> The full **PulseX** pipeline (AI Council, sentiment, backtesting) is the advanced mode.
+No paid API keys required for the daily workflow. Runs 100% locally (tested on macOS and Linux).
 
 ---
 
@@ -19,6 +16,8 @@ Every day, people on X (Twitter) talk about stocks — CEOs, the Fed, influencer
 2. 🧠 Grok searches X and tells you what the market is buzzing about
 3. 📥 You paste Grok's answer back into this tool
 4. 🎯 A local judge reads it + checks live prices → gives you **UP / DOWN / HOLD / TRIM / SELL** signals
+
+Under the hood, PulseX also runs an **AI Council** — six specialist members that score leader tweets, technicals, macro events, and risk, then vote on market direction.
 
 Think of it as: **Grok = your eyes on X** | **PulseX = your brain for trading decisions**
 
@@ -159,7 +158,9 @@ TSLA     DOWN   46%    -0.20   +0.04   $408.95    -0.2%
 
 ## 🛠️ All commands cheat sheet
 
-### MarketGrok (beginner mode — start here)
+### Daily workflow (start here)
+
+Copy-paste Grok → local judge → trade signals:
 
 ```bash
 python3 market_grok.py prompts              # 📋 list all Grok prompts
@@ -174,9 +175,9 @@ python3 market_grok.py portfolio remove AAPL       # ➖ remove stock
 python3 market_grok.py portfolio set-cash 5000     # 💵 set cash balance
 ```
 
-### PulseX (advanced mode — optional)
+### PulseX pipeline (AI Council + backtesting)
 
-Full ML pipeline with AI Council + backtesting:
+Full ML pipeline with AI Council deliberation:
 
 ```bash
 python3 cli.py import-tweets data/sample_tweets.csv   # one-time setup
@@ -185,7 +186,7 @@ python3 cli.py council                                  # AI council vote only
 python3 cli.py backtest                                 # strategy comparison
 ```
 
-Most beginners can skip this and just use **MarketGrok**.
+Most beginners can start with the **daily workflow** above. Use the full PulseX pipeline when you want council votes, backtests, and HTML reports.
 
 ---
 
@@ -220,6 +221,11 @@ Any US ticker Grok mentions — SPY, AAPL, NVDA, TSLA, etc. Default watchlist: S
 **Grok gave a messy answer — will it still work?**
 Best results when Grok follows the structured format in the prompts. Use `market_pulse` or `portfolio_review` for the cleanest output.
 
+**I already have a Grok answer saved (`grok_answer.txt`)**
+```bash
+python3 market_grok.py analyze grok_answer.txt
+```
+
 ---
 
 ## ⚠️ Disclaimer
@@ -235,6 +241,8 @@ This is **research and education software** — not financial advice.
 
 ## 🏗️ How it works under the hood (optional reading)
 
+### Daily workflow
+
 ```text
 You  →  Grok (free, searches X live)
          ↓
@@ -247,6 +255,18 @@ You  →  Grok (free, searches X live)
    Portfolio advisor →  HOLD / TRIM / SELL / WATCH per your holdings
          ↓
    Terminal report   →  easy-to-read table + trade ideas
+```
+
+### AI Council pipeline
+
+```text
+Leader tweets  →  sentiment + impact scoring
+         ↓
+   AI Council (6 members)  →  weighted deliberation
+         ↓
+   ML model + backtest  →  compare vs buy-and-hold
+         ↓
+   HTML report + charts
 ```
 
 ---
